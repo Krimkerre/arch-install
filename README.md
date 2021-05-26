@@ -3,6 +3,8 @@ Basic Arch install script.
 
 Original script by Erik Sundquist
 https://github.com/lotw69
+
+
 https://github.com/lotw69/arch-scripts
 
 I basically took his base.sh script, and modded it for my own purposes
