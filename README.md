@@ -17,6 +17,7 @@ If you run the install script it will completely format your drive defined in th
 To use this script do the following:
 
 Boot from Arch ISO
+
 pacman -Sy
 
 pacman -S git
