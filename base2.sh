@@ -111,17 +111,17 @@ function WHATFMT() {
 ### Set Your System Locale Here
 ################################################################################
 function LOCALE() {
-  ALOCALE="en_US.UTF-8"
+  ALOCALE="nl_BE.UTF-8"
 }
 ### Set Your Country
 ################################################################################
 function COUNTRY() {
-  CNTRY="US"
+  CNTRY="BE"
 }
 ### Set Your Keyboard Map Here
 ################################################################################
 function KEYMAP() {
-  AKEYMAP="us"
+  AKEYMAP="eu"
 }
 ### Set Your Command Line Font (Shell) Here
 ################################################################################
@@ -132,7 +132,7 @@ function CLIFONT() {
 ### Set Your Timezone Here
 ################################################################################
 function STIMEZONE() {
-  TIMEZNE='America/Los_Angeles'
+  TIMEZNE='Europe/Brussels'
 }
 
 ################################################################################
@@ -418,7 +418,7 @@ function NEEDEDPKGS() {
   #echo "##############################################################################"
   dialog --infobox "Installing Needed Packages" 10 50
   sleep 3
-  pacstrap /mnt neofetch git wget rsync htop openssh archlinux-wallpaper glances bashtop bpytop packagekit reflector bat mc lynx ncdu bwm-ng lsd gtop
+  pacstrap /mnt neofetch git wget rsync openssh archlinux-wallpaper bpytop packagekit reflector
 }
 
 ################################################################################
@@ -456,33 +456,6 @@ function MISC_SETTINGS() {
   echo 'include "/usr/share/nano/*.nanorc"' >> /mnt/etc/nanorc
 }
 
-################################################################################
-### BashRC Configuration                                                     ###
-################################################################################
-function BASHRC_CONF() {
-  clear
-  #echo "##############################################################################"
-  #echo "### Configuring the BashRC file                                            ###"
-  #echo "##############################################################################"
-  dialog --infobox "Setting Up The BashRC Config File" 10 50
-  sleep 3
-  echo " " >> /mnt/etc/bash.bashrc
-  echo "# Check to see if neofetch is installed and if so display it" >> /mnt/etc/bash.bashrc
-  echo "if [ -f /usr/bin/neofetch ]; then clear & neofetch; fi" >> /mnt/etc/bash.bashrc
-  sed -i 's/alias/#alias'/g /mnt/etc/skel/.bashrc
-  echo "# Setting up some aliases" >> /mnt/etc/skel/.bashrc
-  echo "alias ls='lsd'" >> /mnt/etc/skel/.bashrc
-  echo "alias cat='bat'" >> /mnt/etc/skel/.bashrc
-  echo "alias fd='ncdu'" >> /mnt/etc/skel/.bashrc
-  echo "alias netsp='bwm-ng'" >> /mnt/etc/skel/.bashrc
-  echo "alias df='duf'" >> /mnt/etc/skel/.bashrc
-  echo "alias font='fontpreview-ueberzug'" >> /mnt/etc/skel/.bashrc
-  echo "alias sysmon='gtop'" >> /mnt/etc/skel/.bashrc
-  echo "alias conf-theme='~/.config/gtk-3.0/settings.ini'" >> /mnt/etc/skel/.bashrc
-  echo "alias video='ytfzf -t --upload-time=today '" >> /mnt/etc/skel/.bashrc
-  echo "alias videos='ytfzf -tS '" >> /mnt/etc/skel/.bashrc
-  echo "alias cpu='cpufetch'" >> /mnt/etc/skel/.bashrc
-}
 
 ################################################################################
 ### Installing The Boot Manager                                              ###
@@ -570,7 +543,6 @@ SYSDSWAP
 MAKEFLAGS_CPU
 NEEDEDPKGS
 MISC_SETTINGS
-BASHRC_CONF
 BOOT_CFG
 ### Setting Passwords and Creating the User                                  ###
 ################################################################################
@@ -587,14 +559,8 @@ $UPASSWD
 
 echo "$RPASSWD
 $RPASSWD" | arch-chroot /mnt passwd
-wget http://raw.githubusercontent.com/lotw69/arch-scripts/master/complete2.sh
-chmod +x complete2.sh
-cp complete2.sh /mnt/home/$USRNM/
 clear
 #echo "##############################################################################"
 #echo "### Installation Is Complete, Please Reboot And Have Fun                   ###"
-#echo "### To Setup The DE and Other Needed Packages Please Type                  ###"
-#echo "### 'sudo pacman -Syyu' after the 1st boot and log on as user, then reboot ###"
-#echo "### Then type './complete.sh' to complete rest of the system install.      ###"
 #echo "##############################################################################"
 dialog --infobox "The installation is complete.  Please reboot and have fun.  To setup a DE/WM and other things please run the ./complete.sh after you reboot." 10 50
