@@ -121,7 +121,7 @@ function COUNTRY() {
 ### Set Your Keyboard Map Here
 ################################################################################
 function KEYMAP() {
-  AKEYMAP="eu"
+  AKEYMAP="us"
 }
 ### Set Your Command Line Font (Shell) Here
 ################################################################################
