@@ -111,7 +111,7 @@ function WHATFMT() {
 ### Set Your System Locale Here
 ################################################################################
 function LOCALE() {
-  ALOCALE="nl_BE.UTF-8"
+  ALOCALE="en_US.UTF-8"
 }
 ### Set Your Country
 ################################################################################
