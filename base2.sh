@@ -281,7 +281,7 @@ function BASEPKG() {
   clear
   dialog --infobox "Installing The Base Packages." 3 33
   sleep 3
-  pacstrap /mnt base base-devel linux linux-firmware linux-headers networkmanager man-db man-pages git btrfs-progs systemd-swap xfsprogs reiserfsprogs jfsutils nilfs-utils terminus-font openntpd dialog
+  pacstrap /mnt base base-devel linux linux-firmware linux-headers nano networkmanager man-db man-pages git btrfs-progs systemd-swap xfsprogs reiserfsprogs jfsutils nilfs-utils terminus-font openntpd dialog
   genfstab -U /mnt >> /mnt/etc/fstab
 }
 
@@ -420,6 +420,31 @@ function MISC_SETTINGS() {
 }
 
 ################################################################################
+### BashRC Configuration                                                     ###
+################################################################################
+function BASHRC_CONF() {
+  clear
+  dialog --infobox "Setting Up The BashRC Config File." 3 38
+  sleep 3
+  echo " " >> /mnt/etc/bash.bashrc
+  echo "# Check to see if neofetch is installed and if so display it" >> /mnt/etc/bash.bashrc
+  echo "if [ -f /usr/bin/neofetch ]; then clear & neofetch; fi" >> /mnt/etc/bash.bashrc
+  sed -i 's/alias/#alias'/g /mnt/etc/skel/.bashrc
+  echo "# Setting up some aliases" >> /mnt/etc/skel/.bashrc
+  echo "alias ls='lsd'" >> /mnt/etc/skel/.bashrc
+  echo "alias cat='bat'" >> /mnt/etc/skel/.bashrc
+  echo "alias fd='ncdu'" >> /mnt/etc/skel/.bashrc
+  echo "alias netsp='bwm-ng'" >> /mnt/etc/skel/.bashrc
+  echo "alias df='duf'" >> /mnt/etc/skel/.bashrc
+  echo "alias font='fontpreview-ueberzug'" >> /mnt/etc/skel/.bashrc
+  echo "alias sysmon='gtop'" >> /mnt/etc/skel/.bashrc
+  echo "alias conf-theme='~/.config/gtk-3.0/settings.ini'" >> /mnt/etc/skel/.bashrc
+  echo "alias video='ytfzf -t --upload-time=today '" >> /mnt/etc/skel/.bashrc
+  echo "alias videos='ytfzf -tS '" >> /mnt/etc/skel/.bashrc
+  echo "alias cpu='cpufetch'" >> /mnt/etc/skel/.bashrc
+}
+
+################################################################################
 ### Installing The Boot Manager                                              ###
 ################################################################################
 function BOOT_CFG() {
@@ -499,6 +524,7 @@ SYSDSWAP
 MAKEFLAGS_CPU
 NEEDEDPKGS
 MISC_SETTINGS
+BASHRC_CONF
 BOOT_CFG
 ### Setting Passwords and Creating the User                                  ###
 ################################################################################
@@ -519,4 +545,4 @@ wget http://raw.githubusercontent.com/lotw69/arch-scripts/master/complete2.sh
 chmod +x complete2.sh
 cp complete2.sh /mnt/home/$USRNM/
 clear
-dialog --infobox "The installation is complete.  Please reboot and have fun." 20 48
+dialog --infobox "The installation is complete.  Please reboot and have fun.  To setup a DE/WM and other things please run the ./complete.sh after you reboot." 20 48
