@@ -532,8 +532,5 @@ $UPASSWD
 
 echo "$RPASSWD
 $RPASSWD" | arch-chroot /mnt passwd
-wget http://raw.githubusercontent.com/lotw69/arch-scripts/master/complete2.sh
-chmod +x complete2.sh
-cp complete2.sh /mnt/home/$USRNM/
 clear
-dialog --infobox "The installation is complete.  Please reboot and have fun.  To setup a DE/WM and other things please run the ./complete.sh after you reboot." 20 48
+dialog --infobox "The installation is complete.  Please reboot and have fun." 20 48
