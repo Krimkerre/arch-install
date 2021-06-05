@@ -427,6 +427,8 @@ function BASHRC_CONF() {
   dialog --infobox "Setting Up The BashRC Config File." 3 38
   sleep 3
   echo " " >> /mnt/etc/bash.bashrc
+  echo "# Check to see if ufetch is installed and if so display it" >> /mnt/etc/bash.bashrc
+  echo "if [ -f /usr/bin/ufetch ]; then clear & ufetch; fi" >> /mnt/etc/bash.bashrc
   sed -i 's/alias/#alias'/g /mnt/etc/skel/.bashrc
   echo "# Setting up some aliases" >> /mnt/etc/skel/.bashrc
   echo "alias sysmon='bpytop'" >> /mnt/etc/skel/.bashrc
