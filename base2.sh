@@ -121,7 +121,7 @@ function COUNTRY() {
 ### Set Your Keyboard Map Here
 ################################################################################
 function KEYMAP() {
-  AKEYMAP="us"
+  AKEYMAP="eu"
 }
 ### Set Your Command Line Font (Shell) Here
 ################################################################################
@@ -145,6 +145,7 @@ function NEEDED_INSTALL() {
   echo "##############################################################################"
   sleep 3
   sed -i 's/\#ParallelDownloads = 5/ParallelDownloads = 5'/g /etc/pacman.conf
+  sed -i '/\#Color/aILoveCandy' /etc/pacman.conf
   pacman -S --noconfirm --needed dialog
 }
 
@@ -153,10 +154,7 @@ function NEEDED_INSTALL() {
 ################################################################################
 function PACMAN_KEYS() {
   clear
-  #echo "################################################################################"
-  #echo "### Fixing The Pacman (Repo) Keys                                            ###"
-  #echo "################################################################################"
-  dialog --infobox "Fixing The Pacman (Repos) Keys" 0 0
+  dialog --infobox "Fixing The Pacman (Repos) Keys." 3 35
   sleep 2
   sudo pacman-key --init
   sudo pacman-key --populate archlinux
@@ -169,10 +167,7 @@ function PACMAN_KEYS() {
 ################################################################################
 function PARTHD() {
   clear
-  #echo "##############################################################################"
-  #echo "### Partitioning the Hard Drive                                            ###"
-  #echo "##############################################################################"
-  dialog --infobox "Partitioning The Hard Drive." 10 50
+  dialog --infobox "Partitioning The Hard Drive." 3 32
   sleep 3
   sgdisk -Z ${HD}
   if [[ -d /sys/firmware/efi/efivars ]]; then
@@ -189,10 +184,7 @@ function PARTHD() {
 function CHK_FMT() {
     if [ "${DRV_FMT}" = "ext4" ]; then
     clear
-    #echo "##############################################################################"
-    #echo "### Formatting the Hard Drive as EXT4                                      ###"
-    #echo "##############################################################################"
-    dialog --infobox "Formatting The Drive As EXT4" 10 50
+    dialog --infobox "Formatting The Drive As EXT4." 3 33
     sleep 3
     if [[ -d /sys/firmware/efi/efivars ]]; then
       #UEFI Partition
@@ -205,10 +197,7 @@ function CHK_FMT() {
   fi
   if [ "${DRV_FMT}" = "btrfs" ]; then
       clear
-      #echo "##############################################################################"
-      #echo "### Formatting the Hard Drive as BTRFS                                     ###"
-      #echo "##############################################################################"
-      dialog --infobox "Formatting The Drive As BTRFS" 10 50
+      dialog --infobox "Formatting The Drive As BTRFS." 3 35
       sleep 3
       if [[ -d /sys/firmware/efi/efivars ]]; then
         #UEFI Partition
@@ -221,10 +210,7 @@ function CHK_FMT() {
     fi
     if [ "${DRV_FMT}" = "xfs" ]; then
       clear
-      #echo "##############################################################################"
-      #echo "### Formatting the Hard Drive as XFS                                       ###"
-      #echo "##############################################################################"
-      dialog --infobox "Formatting The Drive As XFS" 10 50
+      dialog --infobox "Formatting The Drive As XFS." 3 32
       sleep 3
       if [[ -d /sys/firmware/efi/efivars ]]; then
         #UEFI Partition
@@ -237,10 +223,7 @@ function CHK_FMT() {
     fi
     if [ "${DRV_FMT}" = "reiserfs" ]; then
       clear
-      #echo "##############################################################################"
-      #echo "### Formatting the Hard Drive as ReiserFS                                  ###"
-      #echo "##############################################################################"
-      dialog --infobox "Formatting The Drive As ReiserFS" 10 50
+      dialog --infobox "Formatting The Drive As ReiserFS." 3 37
       sleep 3
       if [[ -d /sys/firmware/efi/efivars ]]; then
         #UEFI Partition
@@ -253,10 +236,7 @@ function CHK_FMT() {
     fi
     if [ "${DRV_FMT}" = "jfs" ]; then
       clear
-      #echo "##############################################################################"
-      #echo "### Formatting the Hard Drive as JFS                                       ###"
-      #echo "##############################################################################"
-      dialog --infobox "Formatting The Drive As JFS" 10 50
+      dialog --infobox "Formatting The Drive As JFS." 3 32
       sleep 3
       if [[ -d /sys/firmware/efi/efivars ]]; then
         #UEFI Partition
@@ -269,10 +249,7 @@ function CHK_FMT() {
     fi
     if [ "${DRV_FMT}" = "nilfs2" ]; then
       clear
-      #echo "##############################################################################"
-      #echo "### Formatting the Hard Drive as NILFS2                                    ###"
-      #echo "##############################################################################"
-      dialog --infobox "Formatting The Drive As NILFS2" 10 50
+      dialog --infobox "Formatting The Drive As NILFS2." 3 35
       sleep 3
       if [[ -d /sys/firmware/efi/efivars ]]; then
         #UEFI Partition
@@ -302,10 +279,7 @@ function MNTHD() {
 ################################################################################
 function BASEPKG() {
   clear
-  #echo "##############################################################################"
-  #echo "### Installing the Base Packages                                           ###"
-  #echo "##############################################################################"
-  dialog --infobox "Installing The Base Packages" 10 50
+  dialog --infobox "Installing The Base Packages." 3 33
   sleep 3
   pacstrap /mnt base base-devel linux linux-firmware linux-headers nano networkmanager man-db man-pages git btrfs-progs systemd-swap xfsprogs reiserfsprogs jfsutils nilfs-utils terminus-font openntpd dialog
   genfstab -U /mnt >> /mnt/etc/fstab
@@ -316,10 +290,7 @@ function BASEPKG() {
 ################################################################################
 function SYSDSWAP() {
   clear
-  #echo "##############################################################################"
-  #echo "### Setting up SystemD Swap                                                ###"
-  #echo "##############################################################################"
-  dialog --infobox "Setting Up SystemD Swap" 10 50
+  dialog --infobox "Setting Up SystemD Swap." 3 28
   sleep 3
   rm /mnt/etc/systemd/swap.conf
   echo "#zswap_enabled=1" >> /mnt/etc/systemd/swap.conf
@@ -357,10 +328,7 @@ function SYSDSWAP() {
 ################################################################################
 function MAKEFLAGS_CPU() {
   clear
-  #echo "##############################################################################"
-  #echo "### Fixing the Makeflags for the Compiler                                  ###"
-  #echo "##############################################################################"
-  dialog --infobox "Fixing The Makeflags For The Compiler" 10 50
+  dialog --infobox "Fixing The Makeflags For The Compiler." 3 42
   sleep 3
   numberofcores=$(grep -c ^processor /proc/cpuinfo)
   case $numberofcores in
@@ -413,10 +381,7 @@ function MAKEFLAGS_CPU() {
 ################################################################################
 function NEEDEDPKGS() {
   clear
-  #echo "##############################################################################"
-  #echo "### Installing Needed Packages                                             ###"
-  #echo "##############################################################################"
-  dialog --infobox "Installing Needed Packages" 10 50
+  dialog --infobox "Installing Needed Packages." 3 31
   sleep 3
   pacstrap /mnt neofetch git wget rsync htop openssh archlinux-wallpaper glances bashtop bpytop packagekit reflector bat mc lynx ncdu bwm-ng lsd gtop
 }
@@ -426,10 +391,7 @@ function NEEDEDPKGS() {
 ################################################################################
 function MISC_SETTINGS() {
   clear
-  #echo "##############################################################################"
-  #echo "### Misc Settings Being Installed                                          ###"
-  #echo "##############################################################################"
-  dialog --infobox "Setting Up Misc Settings" 10 50
+  dialog --infobox "Setting Up Misc Settings." 3 29
   sleep 3
   arch-chroot /mnt systemctl enable NetworkManager
   ln -sf /run/systemd/resolve/stub-resolv.conf /mnt/etc/resolv.conf
@@ -445,6 +407,7 @@ function MISC_SETTINGS() {
   arch-chroot /mnt ln -sf /usr/share/zoneinfo/${TIMEZNE} /etc/localtime
   sed -i 's/'#Color'/'Color'/g' /mnt/etc/pacman.conf
   sed -i 's/\#ParallelDownloads = 5/ParallelDownloads = 5'/g /mnt/etc/pacman.conf
+  sed -i '/\#Color/aILoveCandy' /mnt/etc/pacman.conf
   #sed -i 's/\#Include/Include'/g /mnt/etc/pacman.conf
   sed -i '/^#\[multilib\]/{
     N
@@ -461,10 +424,7 @@ function MISC_SETTINGS() {
 ################################################################################
 function BASHRC_CONF() {
   clear
-  #echo "##############################################################################"
-  #echo "### Configuring the BashRC file                                            ###"
-  #echo "##############################################################################"
-  dialog --infobox "Setting Up The BashRC Config File" 10 50
+  dialog --infobox "Setting Up The BashRC Config File." 3 38
   sleep 3
   echo " " >> /mnt/etc/bash.bashrc
   echo "# Check to see if neofetch is installed and if so display it" >> /mnt/etc/bash.bashrc
@@ -490,10 +450,7 @@ function BASHRC_CONF() {
 function BOOT_CFG() {
   if [ "${BOOT_TYPE}" = "systemd" ]; then
     clear
-    #echo "##############################################################################"
-    #echo "### Creating Boot Information                                              ###"
-    #echo "##############################################################################"
-    dialog --infobox "Installing And Configuring The SystemD Boot Loader" 10 50
+    dialog --infobox "Installing And Configuring The SystemD Boot Loader." 3 55
     sleep 3
     arch-chroot /mnt mkdir -p /boot/loader/entries
     arch-chroot /mnt bootctl --path=/boot install
@@ -520,10 +477,7 @@ function BOOT_CFG() {
   fi
   if [ "${BOOT_TYPE}" = "grub" ]; then
     clear
-    #echo "##############################################################################"
-    #echo "### Installing and Configuring GRUB Boot Loader                            ###"
-    #echo "##############################################################################"
-    dialog --infobox "Installing And Configuring The GRUB Boot Loader" 10 50
+    dialog --infobox "Installing And Configuring The GRUB Boot Loader." 3 52
     sleep 3
     if [[ -d /sys/firmware/efi/efivars ]]; then
       pacstrap /mnt grub efibootmgr
@@ -578,7 +532,7 @@ clear
 #echo "##############################################################################"
 #echo "### Setting Up Users and Final Settings                                    ###"
 #echo "##############################################################################"
-dialog --infobox "Setting Up Users And Final Settings" 10 50
+dialog --infobox "Setting Up Users And Final Settings." 3 40
 sleep 3
 arch-chroot /mnt useradd -m -g users -G storage,wheel,power,kvm -s /bin/bash "${USRNM}"
 echo "$UPASSWD
@@ -591,10 +545,4 @@ wget http://raw.githubusercontent.com/lotw69/arch-scripts/master/complete2.sh
 chmod +x complete2.sh
 cp complete2.sh /mnt/home/$USRNM/
 clear
-#echo "##############################################################################"
-#echo "### Installation Is Complete, Please Reboot And Have Fun                   ###"
-#echo "### To Setup The DE and Other Needed Packages Please Type                  ###"
-#echo "### 'sudo pacman -Syyu' after the 1st boot and log on as user, then reboot ###"
-#echo "### Then type './complete.sh' to complete rest of the system install.      ###"
-#echo "##############################################################################"
-dialog --infobox "The installation is complete.  Please reboot and have fun.  To setup a DE/WM and other things please run the ./complete.sh after you reboot." 10 50
+dialog --infobox "The installation is complete.  Please reboot and have fun.  To setup a DE/WM and other things please run the ./complete.sh after you reboot." 20 48
