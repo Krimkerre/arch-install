@@ -158,7 +158,7 @@ function PACMAN_KEYS() {
   sleep 2
   sudo pacman-key --init
   sudo pacman-key --populate archlinux
-  sudo reflector --country DE --latest 20 --sort rate --verbose --save /etc/pacman.d/mirrorlist
+  sudo reflector --country US --latest 20 --sort rate --verbose --save /etc/pacman.d/mirrorlist
   sudo pacman -Sy
 }
 
